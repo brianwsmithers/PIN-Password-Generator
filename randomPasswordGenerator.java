@@ -104,12 +104,12 @@ class randomPasswordGenerator{
     // method by user.
     static void pinGenerator(int passwordLength) {
         SecureRandom random = new SecureRandom();
-        int[] myArray2 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
+        int[] numericalArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
 
         // Array prints random index with SecureRandom Class.
         for (int i = 0; i < passwordLength; i++) {
-            int randomNum = random.nextInt(myArray2.length);
-            System.out.print(myArray2[randomNum]);
+            int randomNum = random.nextInt(numericalArray.length);
+            System.out.print(numericalArray[randomNum]);
         }
     }
 
@@ -119,32 +119,32 @@ class randomPasswordGenerator{
 
         SecureRandom random = new SecureRandom();
 
-        String[] myArray = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n","o",
+        String[] lowerCaseLetterArray = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n","o",
                 "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
-        int[] myArray2 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
-        String[] myArray3 = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O",
+        int[] numericalArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
+        String[] upperCaseLetterArray = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O",
                 "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
-        String[] myArray4 = {"!", "@", "#", "%", "&", "=", "?", "-"};
+        String[] specialCharacterArray = {"!", "@", "#", "%", "&", "=", "?", "-"};
 
         // For loop generates password from array using switch class.
         for (int i = 0; i < passwordLength; i++) { // passwordLength equals users input.
             int valueChoice = 1 + random.nextInt(4); // Bounds account for all arrays in switch case.
             switch(valueChoice) {
                 case 1: // Random lowercase letter is chosen from array.
-                    int randomLowerCaseLetter = random.nextInt(myArray.length);
-                    System.out.print(myArray[randomLowerCaseLetter]);
+                    int randomLowerCaseLetter = random.nextInt(lowerCaseLetterArray.length);
+                    System.out.print(lowerCaseLetterArray[randomLowerCaseLetter]);
                     break; // Restarts loop and generates next value.
                 case 2: // Random numerical value (0-9) is chosen from array.
-                    int randomNum = random.nextInt(myArray2.length);
-                    System.out.print(myArray2[randomNum]);
+                    int randomNum = random.nextInt(numericalArray.length);
+                    System.out.print(numericalArray[randomNum]);
                     break;
                 case 3: // Random uppercase letter is chosen from array.
-                    int randomUpperCaseLetter = random.nextInt(myArray3.length);
-                    System.out.print(myArray3[randomUpperCaseLetter]);
+                    int randomUpperCaseLetter = random.nextInt(upperCaseLetterArray.length);
+                    System.out.print(upperCaseLetterArray[randomUpperCaseLetter]);
                     break;
                 case 4: // Random special character is chosen from array.
-                    int randomSymbols = random.nextInt(myArray4.length);
-                    System.out.print(myArray4[randomSymbols]);
+                    int randomSymbols = random.nextInt(specialCharacterArray.length);
+                    System.out.print(specialCharacterArray[randomSymbols]);
                     break;
             }
         }
