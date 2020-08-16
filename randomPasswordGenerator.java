@@ -43,53 +43,65 @@ class randomPasswordGenerator{
         System.out.printf("Please enter: %n1 - Create PIN%n2 - Create Password%n3 - EXIT%n");
     }
 
+    // Method to instruct input for pin.
+    static void pinInputInstructions() {
+        System.out.println("Enter pin length: (4-32)");
+    }
+    
     // Method takes users input and starts pinGenerator(), passwordGenerator() or EXITS program.
     static void inputMethod(int input) { // If statement selects PIN, Password or EXIT option according to input.
         Scanner obj = new Scanner(System.in); // Creates object for user input.
-        if (input == 1) { // PIN generator
-            int pinLength = 0;
-            System.out.printf("Enter pin length: (4 - 32)%n");
-            try {
+        switch (input) {
+            case 1: // PIN Generator
+                pinSwitchCase(obj, input); // Takes pin length and sends to pinGenerator method.
+                break;
+            case 2: // Password Generator
+                passwordSwitchCase(obj, input);
+                break;
+            default: System.out.println("Program closing");
+        }
+    }
+
+    // Method accepts obj and input to create pin length.
+    static void pinSwitchCase(Scanner obj, int input) {
+        int pinLength = 0;
+        pinInputInstructions();
+        try {
+            pinLength = obj.nextInt();
+            while (pinLength < 4 || pinLength > 32) {
+                System.out.printf("Please enter: (4-32)%n");
                 pinLength = obj.nextInt();
-                while (pinLength < 4 || pinLength > 32) {
-                    System.out.printf("Please enter: (4-32)%n");
-                    pinLength = obj.nextInt();
-                }
-            }  catch (InputMismatchException e) { // If input is not an integer.
-                // Skip to finally block
-            } finally { // Executes if user does not enter valid password length.
-                if (pinLength < 4 || pinLength > 32) {
-                    invalidValuePrompt();
-                    inputMethod(input); // Recursive call to method.
-                }
             }
-            pinGenerator(pinLength); // PIN generates and is printed.
-            System.exit(0); // Program is finished.
+        }  catch (InputMismatchException e) { // If input is not an integer.
+            // Skip to finally block
+        } finally { // Executes if user does not enter valid password length.
+            if (pinLength < 4 || pinLength > 32) {
+                inputMethod(input); // Recursive call to method.
+            }
         }
-        else if (input == 2) { // Password generator
-            int passwordLength = 0;
-            System.out.printf("Enter password length: (6-64)%n");
-            try {
+        pinGenerator(pinLength); // PIN generates and is printed.
+    }
+
+    // Method accepts obj and input to create password length.
+    static void passwordSwitchCase(Scanner obj, int input) {
+        int passwordLength = 0;
+        System.out.printf("Enter password length: (6-64)%n");
+        try {
+            passwordLength = obj.nextInt();
+            while (passwordLength < 4 || passwordLength > 64) {
+                invalidValuePrompt();
+                System.out.printf("Please enter: (4-64)%n");
                 passwordLength = obj.nextInt();
-                while (passwordLength < 4 || passwordLength > 64) {
-                    invalidValuePrompt();
-                    System.out.printf("Please enter: (4-64)%n");
-                    passwordLength = obj.nextInt();
-                }
-            } catch (InputMismatchException e) {
-                // Skip to finally block
-            } finally {
-                if (passwordLength < 4 || passwordLength > 64) {
-                    invalidValuePrompt();
-                    inputMethod(input); // Recursive call to method.
-                }
             }
-            passwordGenerator(passwordLength); // Password generates and is printed.
-            System.exit(0); // Program exits.
+        } catch (InputMismatchException e) {
+            // Skip to finally block
+        } finally {
+            if (passwordLength < 4 || passwordLength > 64) {
+                invalidValuePrompt();
+                inputMethod(input); // Recursive call to method.
+            }
         }
-        else if (input == 3) { // EXIT program.
-            System.exit(0);
-        }
+        passwordGenerator(passwordLength); // Password generates and is printed.
     }
 
     // Method used during try-catch blocks when user inputs a non-integer value.
@@ -147,4 +159,3 @@ class randomPasswordGenerator{
         }
     }
 }
-
