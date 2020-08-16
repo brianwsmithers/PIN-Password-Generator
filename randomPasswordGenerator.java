@@ -20,25 +20,22 @@ class randomPasswordGenerator{
 
     // Method accepts (1), (2), (3) or handles any input exception.
     static void menuMethod() {
-        int input = 0;  // Initialize integer input value.
-        while (input != 1 && input != 2 && input != 3) { // User must choose these options to progress.
-            Scanner obj = new Scanner(System.in); // Creates object for user input.
-            try { // Try-catch block to catch incorrect input value...i.e. not an integer.
-                input = obj.nextInt(); // 1 - PIN // 2 - Password // 3 - EXIT.
-                if (input == 1 || input == 2 || input == 3) {
-                    inputMethod(input); // Successful input
-                }
-                else {
-                    invalidValuePrompt(); // Remind user to select correct value.
-                    menuMethod(); // Recursive call gives user option to create PIN, Password or EXIT.
-                }
-            } catch (InputMismatchException e) { // If input is not an integer.
-                // Skip to finally block
-            } finally {
-                invalidValuePrompt(); // Remind user to select correct value.
-                menuMethod(); // Recursive call gives user option to create PIN, Password or EXIT.
-            }
+        Scanner obj = new Scanner(System.in); // Creates object for user input.
+        int input = obj.nextInt();  // Initialize integer input value.
+        switch (input) {
+            case 1:
+            case 2:
+            case 3:
+                inputMethod(input);
+                break;
+            default: defaultCase();
         }
+    }
+
+    // Method for default case returns user to main method after printing incorrect input message.
+    static void defaultCase() {
+        invalidValue();
+        menuMethod();
     }
 
     // Method for menuMethod()
@@ -150,3 +147,4 @@ class randomPasswordGenerator{
         }
     }
 }
+
